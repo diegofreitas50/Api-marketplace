@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsString, Length, Matches, MinLength } from "class-validator";
+import { IsEmail, IsNumber, IsString, Length, Matches, MinLength } from "class-validator";
 
 export class CreateUserDto {
   @Length(3, 40)
@@ -18,7 +18,7 @@ export class CreateUserDto {
     description: 'CPF do usuário. somente números',
     example: '12345678910',
   })
-  cpf: bigint;
+  cpf: string;
 
   @IsEmail()
   @ApiProperty({
