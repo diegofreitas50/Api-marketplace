@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "api-marketplace",
+=======
+  "name": "nest-app",
+>>>>>>> origin/development
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -27,6 +31,10 @@
     "@nestjs/passport": "^8.2.2",
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/swagger": "^5.2.1",
+<<<<<<< HEAD
+=======
+    "@prisma/client": "^3.15.2",
+>>>>>>> origin/development
     "bcrypt": "^5.0.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
