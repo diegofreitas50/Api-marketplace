@@ -10,6 +10,16 @@ export class CreateUserDto {
   })
   name: string;
 
+  @Length(11, 11)
+  @Matches(/^[0-9]*$/, {
+    message: 'CPF inválido.',
+  })
+  @ApiProperty({
+    description: 'CPF do usuário. somente números',
+    example: '12345678910',
+  })
+  cpf: bigint;
+
   @IsEmail()
   @ApiProperty({
     description: 'E-mail de usuário',

@@ -17,20 +17,20 @@ export class AuthService {
     console.log(`dto.. ${email} - ${password}`);
 
     const user = await this.prisma.user.findUnique({ where: { email } });
-    console.log(`User: ${user.Email}`);
+    console.log(`User: ${user.email}`);
 
     if (!user) {
       throw new UnauthorizedException('Usuário e/ou senha inválidos');
     }
 
-    const isHashValid = await bcrypt.compare(password, user.Password);
+    const isHashValid = await bcrypt.compare(password, user.password);
     console.log(`hash :${isHashValid}`);
 
     if (!isHashValid) {
       throw new UnauthorizedException('Usuário e/ou senha inválidos');
     }
 
-    delete user.Password;
+    delete user.password;
 
     return {
       token: this.jwtService.sign({ email }),
