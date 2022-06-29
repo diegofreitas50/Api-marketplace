@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Categoria {
+  id String @id @default(uuid())
+  isAdmin  Boolean   @default(false) @map("is_admin")
+  usuarios Usuario[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  @@map("user")
+}
+
+model Usuario {
+  id String @id @default(uuid())
+  name        String
+  email       String
+  password    String
+  categoria   String
+  userId       String        @map("user_id")
+  cat       Categoria[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  @@map("profile")
+}
