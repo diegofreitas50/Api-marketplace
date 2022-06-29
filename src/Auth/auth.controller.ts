@@ -5,6 +5,8 @@ import { LoginResponseDto } from './dto/login-response.dto';
 import { LoginDto } from './dto/login.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { UseGuards } from '@nestjs/common';
+import { LoggedUser } from './loggerd-user.decorator';
+import { User } from 'src/User/entities/user.entity';
 
 @Controller('Auth')
 @ApiTags('Auth')
@@ -27,8 +29,8 @@ export class AuthController {
     summary: 'Retorna o usuário autenticado no momento',
   })
   @ApiBearerAuth()
-  profile() {
-    return { message: 'Autenticação bem sucedida' };
+  profile(@LoggedUser() user: User) {
+    return {message: 'Autenticado com sucesso.', user};
   }
 }
 

@@ -3,7 +3,7 @@
 export class User {
   id?: string;
   name: string;
-  cpf: bigint;
+  cpf: string;
   email: string;
   password: string;
   isAdmin: boolean;

@@ -10,7 +10,7 @@ datasource db {
 model User{
   id String @id @default(uuid())
   name String
-  cpf BigInt @unique
+  cpf String @unique
   email String @unique
   password String
   isAdmin Boolean @default(false)
@@ -66,7 +66,3 @@ model Bag{
   createdAt          DateTime @default(now()) @map("created_at")
   updatedAt          DateTime @updatedAt @map("updated_at")
 }
-
-
-
-
