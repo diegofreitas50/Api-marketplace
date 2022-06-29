@@ -1,7 +1,7 @@
 {
   "name": "apimktplace",
   "version": "0.0.1",
-  "description": "",
+  "description": "![image](https://user-images.githubusercontent.com/89053771/173943531-e74f30b6-5f0d-4919-bcf2-3c610f1af475.png)",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
@@ -82,5 +82,15 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  }
+  },
+  "main": ".eslintrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diegofreitas50/Api-marketplace.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/diegofreitas50/Api-marketplace/issues"
+  },
+  "homepage": "https://github.com/diegofreitas50/Api-marketplace#readme"
 }
