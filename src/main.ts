@@ -19,6 +19,7 @@ async function bootstrap() {
     .setVersion('1.0.0')
     .addTag('status')
     .addTag('Auth')
+    .addTag('Create-user')
     .addTag('User')
     .addBearerAuth()
     .build();
