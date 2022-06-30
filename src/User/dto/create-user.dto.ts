@@ -18,7 +18,7 @@ export class CreateUserDto {
     description: 'CPF do usuário. somente números',
     example: '12345678910',
   })
-  cpf: bigint;
+  cpf: string;
 
   @IsEmail()
   @ApiProperty({
