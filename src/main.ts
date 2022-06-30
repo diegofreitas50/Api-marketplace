@@ -17,7 +17,7 @@ async function bootstrap() {
     .setTitle('API-MarketPlace')
     .setDescription('Aplicação para exposição e venda de produtos')
     .setVersion('1.0.0')
-    .addTag('status')
+    .addTag('Status')
     .addTag('Auth')
     .addTag('Create-user')
     .addTag('User')
