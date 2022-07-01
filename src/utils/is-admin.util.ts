@@ -1,5 +1,5 @@
 import { UnauthorizedException } from '@nestjs/common';
-import { User } from 'src/user/entities/user.entity';
+import { User } from '../User/entities/user.entity';
 
 export function isAdmin(user: User) {
   if (!user.isAdmin) {
