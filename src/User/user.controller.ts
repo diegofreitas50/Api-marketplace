@@ -31,7 +31,7 @@ export class UserController {
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @Get(':id')
-  @ApiOperation({ summary: 'Visualizar um usuário pelo Id. Somente para Admin.' })
+  @ApiOperation({ summary: 'Visualizar um usuário pelo Id.' })
   findOne(@Param('id') id: string) {
     return this.userService.findOne(id);
   }
@@ -40,9 +40,10 @@ export class UserController {
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @Patch(':id')
-  @ApiOperation({ summary: 'Editar um usuário pelo id. Somente para Admin.' })
-  update(@LoggedUser() user: User, @Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(user, id, updateUserDto);
+  @ApiOperation({ summary: 'Edita dados do usuário logado' })
+  update(@LoggedUser() user: User, @Body() updateUserDto: UpdateUserDto) {
+    updateUserDto.id = user.id;
+    return this.userService.update(user, updateUserDto);
   }
 
   @ApiTags('User')
@@ -51,9 +52,9 @@ export class UserController {
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
   @ApiOperation({
-    summary: 'Remover um usuário pelo id. Somente para Admin.',
+    summary: 'Remove usuário logado.',
   })
-  delete(@LoggedUser() user: User, @Param('id') id: string) {
-    return this.userService.delete(user, id);
+  delete(@LoggedUser() user: User) {
+    return this.userService.delete(user);
   }
 }

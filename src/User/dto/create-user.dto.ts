@@ -50,4 +50,6 @@ export class CreateUserDto {
     example: false,
   })
   isAdmin: boolean;
+
+  id?: string;
 }

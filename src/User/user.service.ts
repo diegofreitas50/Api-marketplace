@@ -91,11 +91,30 @@ export class UserService {
     return record;
   }
 
-  update(user: User, id: string, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(user: User, updateUserDto: UpdateUserDto) {
+
+    if (updateUserDto.password) {
+      if (updateUserDto.password != updateUserDto.confirmPassword) {
+        throw new BadRequestException('As senhas informadas não são iguais.');
+      }
+    }
+
+    delete updateUserDto.confirmPassword;
+
+    const data: Partial<User> = { ...updateUserDto };
+
+    if (data.password) {
+      data.password = await bcrypt.hash(data.password, 10);
+    }
+    const id = user.id;
+
+    return this.prisma.user
+      .update({ where: { id }, data, select: this.userSelect })
+      .catch(handleError);
   }
 
-  delete(user: User, id: string) {
-    return `This action removes a #${id} user`;
+  async delete(user: User) {
+    const id = user.id;
+    return await this.prisma.user.delete({ where: { id } }); //finalizar
   }
 }
