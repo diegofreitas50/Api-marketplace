@@ -4,10 +4,15 @@
 
 descrição...
 
-## Deploy da aplicação [clicando aqui](https:/)
+## Deploy da aplicação [clicando aqui](https://api-marketplace-production.up.railway.app)
 
 ```
-https://
+https://api-marketplace-production.up.railway.app
+```
+## Swagger [clicando aqui](https://api-marketplace-production.up.railway.app/api)
+
+```
+https://api-marketplace-production.up.railway.app/api
 ```
 
 ## Para clonar o projeto
