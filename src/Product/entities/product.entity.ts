@@ -1,5 +1,6 @@
 import { User } from "src/User/entities/user.entity"
 import{Category} from"src/Category/entities/category.entity"
+import {Bag} from "src/Bag/entities/bag.entity"
 //import {bag} from ""
 
 export class Product {

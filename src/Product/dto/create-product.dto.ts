@@ -24,7 +24,7 @@ export class CreateProductDto {
 @ApiProperty({
   example:'True or False',
 })
-  new:Boolean;
+  new:boolean;
 
   @IsNumber()
 @ApiProperty({
@@ -42,5 +42,5 @@ export class CreateProductDto {
 @ApiProperty({
   example:'dslakdjskaldsaldsaklasdaldda',
 })
-  categoryID?:String;
+  categoryID?:string;
 }
