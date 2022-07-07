@@ -1,6 +1,6 @@
 import { User } from "src/User/entities/user.entity"
 import{Category} from"src/Category/entities/category.entity"
-//import {bag} from ""
+import {Bag} from "src/"
 
 export class Product {
   id?: string;
