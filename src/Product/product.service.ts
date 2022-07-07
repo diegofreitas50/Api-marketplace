@@ -34,19 +34,17 @@ export class ProductService {
   create(dto: CreateProductDto) {
 
     const data: Prisma.ProductCreateInput = {
-        title:dto.title,
-        description:dto.description,
-        imgURL:dto.imgURL,
-        new:dto.new,
-        price:dto.price,
-
-      Category: {
+      title: dto.title,
+      description: dto.description,
+      imgURL: dto.imgURL,
+      new: dto.new,
+      price: dto.price,
+      sold: false,
+      category: {
         connect: {
-          id: dto.product.map((categoryID) => ({
-            id: categoryID,
-            })),
+          id: dto.categoryID
         }
-      },
+      }
     }
 
     return this.prisma.product
@@ -86,6 +84,7 @@ export class ProductService {
       },
     }
 
+
     return this.prisma.product
       .update({
         where:{id},
@@ -108,7 +107,7 @@ export class ProductService {
     async delete(id: string) {
       await this.findById(id);
 
-      await this.prisma.game.delete({ where: { id } });
+      await this.prisma.product.delete({ where: { id } });
     }
 
 }
