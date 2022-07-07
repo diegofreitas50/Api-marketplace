@@ -23,7 +23,6 @@ export class AuthService {
     }
 
     const isHashValid = await bcrypt.compare(password, user.password);
-    console.log(`hash :${isHashValid}`);
 
     if (!isHashValid) {
       throw new UnauthorizedException('Usuário e/ou senha inválidos');
