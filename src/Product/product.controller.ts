@@ -14,49 +14,49 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @ApiBearerAuth()
 @Controller('Product')
 export class ProductController {
-  constructor(private gameService: ProductService) {}
+  constructor(private productService: ProductService) {}
 
   @Get()
   @ApiOperation({
-    summary: 'Listar todos os jogos',
+    summary: 'Listar todos os produtos',
   })
   findAll() {
-    return this.gameService.findAll();
+    return this.productService.findAll();
   }
 
   @Get(':id')
   @ApiOperation({
-    summary: 'Localizar um jogo',
+    summary: 'Localizar um produto',
   })
   findOne(@Param('id') id: string){
-     return this.gameService.findOne(id);
+     return this.productService.findOne(id);
   }
 
   @Post()
   @ApiOperation({
-    summary: 'Adicionar um jogo',
+    summary: 'Adicionar um produto',
   })
-  create(@Body() createGameDto: CreateGameDto) {
+  create(@Body() createGameDto: CreateProductDto) {
 
-    return this.gameService.create(createGameDto);
+    return this.productService.create(createGameDto);
   }
 
   @Patch(':id')
   @ApiOperation({
-    summary: 'Alterar dados de um jogo',
+    summary: 'Alterar dados de um produto',
   })
-  update(@Param('id') id: string, @Body() dto: UpdateGameDto){
+  update(@Param('id') id: string, @Body() dto: UpdateProductDto){
 
-    return this.gameService.update(id,dto);
+    return this.productService.update(id,dto);
   }
 
 
   @Delete(':id')
   @ApiOperation({
-    summary: 'Deletar um jogo"',
+    summary: 'Deletar um produto"',
   })
   @HttpCode(HttpStatus.NO_CONTENT)
   delete(@Param('id') id: string) {
-    this.gameService.delete(id);
+    this.productService.delete(id);
   }
 }
