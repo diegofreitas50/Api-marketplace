@@ -1,4 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { LoggedUser } from 'src/Auth/loggerd-user.decorator';
+import { User } from 'src/User/entities/user.entity';
 import { BagService } from './bag.service';
 import { CreateBagDto } from './dto/create-bag.dto';
 import { UpdateBagDto } from './dto/update-bag.dto';
@@ -8,8 +10,8 @@ export class BagController {
   constructor(private readonly bagService: BagService) {}
 
   @Post()
-  create(@Body() createBagDto: CreateBagDto) {
-    return this.bagService.create(createBagDto);
+  create(@LoggedUser() user: User, @Body() createBagDto: CreateBagDto) {
+    return this.bagService.create(user, createBagDto);
   }
 
   @Get()

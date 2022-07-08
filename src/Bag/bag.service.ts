@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { User } from 'src/User/entities/user.entity';
+import { handleError } from 'src/utils/handleError.utils';
 import { CreateBagDto } from './dto/create-bag.dto';
 import { UpdateBagDto } from './dto/update-bag.dto';
 
@@ -8,11 +10,24 @@ import { UpdateBagDto } from './dto/update-bag.dto';
 export class BagService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(createBagDto: CreateBagDto) {
+  async create(user: User, createBagDto: CreateBagDto) {
     const data: Prisma.BagCreateInput = {
       product: { connect: { id: createBagDto.productId } },
-      user: {connect: {id: createBagDto.userId}},
-    }
+      user: { connect: user },
+    };
+
+    data.product
+
+    return await this.prisma.bag.create({
+      data,
+      select: {
+        id: true,
+        user: { select: { id: true, name: true } },
+        product: {
+          select: { id: true, title: true, imgURL: true, price: true },
+        },
+      },
+    }).catch(handleError);
   }
 
   findAll() {
