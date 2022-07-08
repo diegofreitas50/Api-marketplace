@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsUUID } from "class-validator";
+import { IsBoolean, IsUUID } from "class-validator";
 
 
 export class CreateBagDto {

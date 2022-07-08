@@ -34,7 +34,6 @@ model Product {
   imgURL String
   new Boolean
   price Int
-  sold Boolean @default(false)
 
   category Category @relation(fields: [categoryID],references: [id])
   categoryID String @map("category_id")

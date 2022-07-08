@@ -1,22 +1,21 @@
-import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Bag, Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { Product } from 'src/Product/entities/product.entity';
 import { User } from 'src/User/entities/user.entity';
 import { handleError } from 'src/utils/handleError.utils';
+import { isAdmin } from 'src/utils/is-admin.util';
 import { CreateBagDto } from './dto/create-bag.dto';
 import { UpdateBagDto } from './dto/update-bag.dto';
 
 @Injectable()
 export class BagService {
   constructor(private readonly prisma: PrismaService) {}
-
   async create(user: User, createBagDto: CreateBagDto) {
     const data: Prisma.BagCreateInput = {
-      product: { connect: { id: createBagDto.productId } },
+      product: { connect: { id: createBagDto.productId}},
       user: { connect: user },
     };
-
-    data.product
 
     return await this.prisma.bag.create({
       data,
@@ -30,19 +29,49 @@ export class BagService {
     }).catch(handleError);
   }
 
-  findAll() {
-    return `This action returns all bag`;
+  async findAll(): Promise<Bag[]> {
+    const allBags = await this.prisma.bag.findMany();
+
+    if (allBags.length === 0) {
+      throw new NotFoundException('Não há categorias cadastradas.');
+    }
+
+    return allBags;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} bag`;
+  async findOne(id: string) {
+    const record = await this.prisma.bag.findUnique({
+      where: { id },
+      select: { id: true, user:true,product:true},
+    });
+
+    if (!record) {
+      throw new NotFoundException(`Registro com id '${id}' não encontrado.`);
+    }
+
+    return record;
   }
 
-  update(id: number, updateBagDto: UpdateBagDto) {
-    return `This action updates a #${id} bag`;
+  async update(user: User, id: string, updateBagDto: UpdateBagDto) {
+    isAdmin(user);
+
+    await this.findOne(id);
+
+    const data: Partial<Bag> = { ...updateBagDto };
+
+    return this.prisma.bag
+      .update({ where: { id }, data })
+      .catch(handleError);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} bag`;
+
+  async delete(user: User, id: string) {
+    isAdmin(user);
+
+    await this.findOne(id);
+
+    await this.prisma.bag.delete({ where: { id } });
+
+    return `This action removes a #${id} category`;
   }
 }

@@ -36,7 +36,7 @@ export class CreateProductDto {
 @ApiProperty({
   example:'True or False',
 })
-  sold:Boolean;
+  sold:boolean;
 
   @IsString()
 @ApiProperty({
