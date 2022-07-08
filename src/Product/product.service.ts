@@ -4,8 +4,9 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { Product} from './entities/product.entity';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { error } from 'console';
-//import { handleError } from 'src/Utils/handle-error.util';
 import { Prisma } from '@prisma/client';
+import { Category } from 'src/Category/entities/category.entity';
+import { handleError } from 'src/utils/handleError.utils';
 
 @Injectable()
 export class ProductService {
@@ -40,48 +41,48 @@ export class ProductService {
       new: dto.new,
       price: dto.price,
       sold: false,
-      category: {
-        connect: {
-          id: dto.categoryID
+      category:{
+        connect:{
+          id:dto.categoryID
         }
       }
     }
 
     return this.prisma.product
-      .create({
-        data,
-        select: {
-            title:true,
-            description:true,
-            imgURL:true,
-            new:true,
-            price:true,
+    .create({
+      data,
+      select: {
+        title:true,
+        description:true,
+        imgURL:true,
+        new:true,
+        price:true,
+        sold:true,
 
-          Category: {
-            Selec: {
-                title:true
-            }
+        category:{
+          select:{
+            title:true,
           }
-      }).catch(handleError);
+        }
+      }
+    }).catch(handleError)
   }
+
 
    update(id: string,dto:UpdateProductDto){
    this.findById(id)
     const data: Prisma.ProductUpdateInput = {
-        select:{
-            title:dto.title,
-            description:dto.description,
-            imgURL:dto.imgURL,
-            new:dto.new,
-            price:dto.price,
-
-            Category: {
-                connect: {
-                id: dto.product.map((categoryID) => ({
-                id: categoryID,
-            })),
+      title: dto.title,
+      description: dto.description,
+      imgURL: dto.imgURL,
+      new: dto.new,
+      price: dto.price,
+      sold: false,
+      category:{
+        connect:{
+          id:dto.categoryID
         }
-      },
+      }
     }
 
 
@@ -90,17 +91,19 @@ export class ProductService {
         where:{id},
         data,
         select: {
-            title:true,
-            description:true,
-            imgURL:true,
-            new:true,
-            price:true,
+          title:true,
+          description:true,
+          imgURL:true,
+          new:true,
+          price:true,
+          sold:true,
 
-          Category: {
-            Selec: {
-                title:true
+          category:{
+            select:{
+              title:true,
             }
           }
+        }
       }).catch(handleError);
     }
 
