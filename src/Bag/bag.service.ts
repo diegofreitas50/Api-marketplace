@@ -16,7 +16,7 @@ export class BagService {
       user: { connect: user },
     };
 
-    data.product
+    //boolean do sold
 
     return await this.prisma.bag.create({
       data,
@@ -24,7 +24,7 @@ export class BagService {
         id: true,
         user: { select: { id: true, name: true } },
         product: {
-          select: { id: true, title: true, imgURL: true, price: true },
+          select: { id: true, title: true, imgURL: true, price: true, sold: true },
         },
       },
     }).catch(handleError);
