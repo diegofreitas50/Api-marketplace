@@ -1,13 +1,14 @@
 ### Todo
 
 - [x] Incluir a função isAdmin nos campos devidos
+- [x] criar a rota que faz a busca apenas de produtos disponíveis.
 - [x] Implementar Compodoc
 - [x] Readme
 - [x] Testar API
 
 ### In Progress
 
-- [x] criar a rota que faz a busca apenas de produtos disponíveis.
+- [x] Testar API (Felipe)
 
 ### Done ✓
 
