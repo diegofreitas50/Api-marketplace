@@ -34,9 +34,9 @@ export class CreateProductDto {
 
   @IsBoolean()
 @ApiProperty({
-  example:'True or False',
+  example:'dslakdjskaldsaldsaklasdaldda',
 })
-  sold:boolean;
+userID:string;
 
   @IsString()
 @ApiProperty({

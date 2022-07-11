@@ -1,16 +1,19 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Bag, Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Product } from 'src/Product/entities/product.entity';
 import { User } from 'src/User/entities/user.entity';
 import { handleError } from 'src/utils/handleError.utils';
-import { isAdmin } from 'src/utils/is-admin.util';
+import { isAdmin } from 'src/utils/is-admin.utils';
+import { isOwner } from 'src/utils/is-owner.utils';
 import { CreateBagDto } from './dto/create-bag.dto';
 import { UpdateBagDto } from './dto/update-bag.dto';
+import { Bag } from './entities/bag.entity';
 
 @Injectable()
 export class BagService {
   constructor(private readonly prisma: PrismaService) {}
+
   async create(user: User, createBagDto: CreateBagDto) {
     const data: Prisma.BagCreateInput = {
       product: { connect: { id: createBagDto.productId}},
@@ -29,7 +32,8 @@ export class BagService {
     }).catch(handleError);
   }
 
-  async findAll(): Promise<Bag[]> {
+  async findAll(id: string,user): Promise<Bag[]> {
+    isOwner(user,id);
     const allBags = await this.prisma.bag.findMany();
 
     if (allBags.length === 0) {
@@ -39,10 +43,11 @@ export class BagService {
     return allBags;
   }
 
-  async findOne(id: string) {
+  async findOne(id: string,user) {
+    isOwner(user,id);
     const record = await this.prisma.bag.findUnique({
       where: { id },
-      select: { id: true, user:true,product:true},
+      select: { id: true,user:true,product:true},
     });
 
     if (!record) {
@@ -52,23 +57,9 @@ export class BagService {
     return record;
   }
 
-  async update(user: User, id: string, updateBagDto: UpdateBagDto) {
-    isAdmin(user);
-
-    await this.findOne(id);
-
-    const data: Partial<Bag> = { ...updateBagDto };
-
-    return this.prisma.bag
-      .update({ where: { id }, data })
-      .catch(handleError);
-  }
-
 
   async delete(user: User, id: string) {
-    isAdmin(user);
-
-    await this.findOne(id);
+    isOwner(user,id);
 
     await this.prisma.bag.delete({ where: { id } });
 

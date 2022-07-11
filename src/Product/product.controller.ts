@@ -8,6 +8,8 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { LoggedUser } from 'src/Auth/loggerd-user.decorator';
+import { User} from 'src/User/entities/user.entity';
 
 @ApiTags('Product')
 @UseGuards(AuthGuard())
@@ -20,6 +22,7 @@ export class ProductController {
   @ApiOperation({
     summary: 'Listar todos os produtos',
   })
+
   findAll() {
     return this.productService.findAll();
   }
@@ -36,27 +39,27 @@ export class ProductController {
   @ApiOperation({
     summary: 'Adicionar um produto',
   })
-  create(@Body() createGameDto: CreateProductDto) {
+  create(@LoggedUser() user: User,@Body() createProductDto: CreateProductDto) {
 
-    return this.productService.create(createGameDto);
+    return this.productService.create(createProductDto,user);
   }
 
   @Patch(':id')
   @ApiOperation({
     summary: 'Alterar dados de um produto',
   })
-  update(@Param('id') id: string, @Body() dto: UpdateProductDto){
+  update(@Param('id') id: string, @Body() dto: UpdateProductDto,@LoggedUser() user: User){
 
-    return this.productService.update(id,dto);
+    return this.productService.update(id,dto,user);
   }
 
 
   @Delete(':id')
   @ApiOperation({
-    summary: 'Deletar um produto"',
+    summary: 'Deletar um produto',
   })
   @HttpCode(HttpStatus.NO_CONTENT)
-  delete(@Param('id') id: string) {
-    this.productService.delete(id);
+  delete(@Param('id') id: string,@LoggedUser() user:User) {
+    this.productService.delete(id,user);
   }
 }

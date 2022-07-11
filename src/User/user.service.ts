@@ -9,7 +9,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { handleError } from 'src/utils/handleError.utils';
-import { isAdmin } from 'src/utils/is-admin.util';
+import { isAdmin } from 'src/utils/is-admin.utils';
 import { Prisma } from '@prisma/client';
 
 @Injectable()

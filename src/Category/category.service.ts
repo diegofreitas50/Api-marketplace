@@ -3,7 +3,7 @@ import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { User } from 'src/User/entities/user.entity';
 import { handleError } from 'src/utils/handleError.utils';
-import { isAdmin } from 'src/utils/is-admin.util';
+import { isAdmin } from 'src/utils/is-admin.utils';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Category } from './entities/category.entity';

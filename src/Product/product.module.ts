@@ -9,4 +9,4 @@ import { PassportModule } from '@nestjs/passport';
   controllers: [ProductController],
   providers: [ProductService],
 })
-export class GameModule {}
+export class ProductModule {}

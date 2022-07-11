@@ -5,7 +5,7 @@ import { IsString } from "class-validator";
 export class CreateCategoryDto {
   @IsString()
   @ApiProperty({
-    description: 'Criar nova categoria.',
+    description: 'Inserir nova categoria',
     example: 'Eletrônicos'
   })
   title: string;

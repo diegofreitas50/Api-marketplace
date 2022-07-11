@@ -1,49 +1,50 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, UseGuards } from '@nestjs/common';
 import { LoggedUser } from 'src/Auth/loggerd-user.decorator';
 import { User } from 'src/User/entities/user.entity';
 import { BagService } from './bag.service';
 import { CreateBagDto } from './dto/create-bag.dto';
 import { UpdateBagDto } from './dto/update-bag.dto';
 import { Bag, Product } from '@prisma/client';
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
-@Controller('bag')
+@ApiTags('Bag')
+@UseGuards(AuthGuard())
+@ApiBearerAuth()
+@Controller('Bag')
 export class BagController {
   constructor(private readonly bagService: BagService) {}
 
   @Post()
+  @ApiOperation({
+    summary: 'Incluir um produto a sua Bag',
+  })
   create(@LoggedUser() user: User, @Body() createBagDto: CreateBagDto) {
     return this.bagService.create(user, createBagDto);
   }
 
   @Get()
-  findAll() {
-    return this.bagService.findAll();
+  @ApiOperation({
+    summary: 'Visualizar todas as suas transações'
+  })
+  findAll(id: string,user) {
+    return this.bagService.findAll(user,id);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.bagService.findOne(id);
-  }
-
-  @Patch(':id')
   @ApiOperation({
-    summary: 'Editar categoria pelo ID. Somente para Admin.',
+    summary: 'Visualizar uma de suas transações (Bag).'
   })
-  update(
-    @LoggedUser() user: User,
-    @Param('id') id: string,
-    @Body() updateBagDto: UpdateBagDto,
-  ): Promise<Bag> {
-    return this.bagService.update(user, id, updateBagDto);
+  findOne(@LoggedUser() user:User,@Param('id') id: string) {
+    return this.bagService.findOne(id,user);
   }
 
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
   @ApiOperation({
-    summary: 'Deletar categoria pelo ID. Somente para Admin.',
+    summary: 'Deletar um registro de transação (Bag).',
   })
-  delete(@LoggedUser() user: User, @Param('id') id: string) {
+  delete(@LoggedUser() user: User, @Param('id') id:string) {
     return this.bagService.delete(user, id);
   }
 }

@@ -7,6 +7,8 @@ import { error } from 'console';
 import { Prisma } from '@prisma/client';
 import { Category } from 'src/Category/entities/category.entity';
 import { handleError } from 'src/utils/handleError.utils';
+import { identity } from 'rxjs';
+import { isOwner } from 'src/utils/is-owner.utils';
 
 @Injectable()
 export class ProductService {
@@ -14,25 +16,24 @@ export class ProductService {
   constructor(private readonly prisma: PrismaService) {}
 
     findAll() {
-      return this.prisma.product.findMany()
+      return this.prisma.product.findMany({
+      })
     }
 
-    findById(id: string){
-      const record = this.prisma.product.findUnique({
+    async findOne(id: string) {
+      const record = await this.prisma.product.findUnique({
         where: { id },
+        select: { id: true, title: true },
       });
 
       if (!record) {
-        throw new NotFoundException(`Registro com o ID '${id}' não encontrado.`);
+        throw new NotFoundException(`Registro com id '${id}' não encontrado.`);
       }
+
       return record;
     }
 
-  async findOne(id: string){
-    return await this.prisma.product.findUnique({where: {id}})
-    }
-
-  create(dto: CreateProductDto) {
+  create(dto: CreateProductDto,user) {
 
     const data: Prisma.ProductCreateInput = {
       title: dto.title,
@@ -40,7 +41,9 @@ export class ProductService {
       imgURL: dto.imgURL,
       new: dto.new,
       price: dto.price,
-      sold: false,
+      user:{
+        connect:user.userID
+      },
       category:{
         connect:{
           id:dto.categoryID
@@ -57,8 +60,12 @@ export class ProductService {
         imgURL:true,
         new:true,
         price:true,
-        sold:true,
-
+        user:{
+          select:{
+            id:true,
+            name:true
+          }
+        },
         category:{
           select:{
             title:true,
@@ -69,15 +76,21 @@ export class ProductService {
   }
 
 
-   update(id: string,dto:UpdateProductDto){
-   this.findById(id)
+   update(id: string,dto:UpdateProductDto,user){
+    isOwner(user,id);
+    this.findOne(id);
+
     const data: Prisma.ProductUpdateInput = {
       title: dto.title,
       description: dto.description,
       imgURL: dto.imgURL,
       new: dto.new,
       price: dto.price,
-      sold: false,
+      user:{
+        connect:{
+          id:user.userID,
+        }
+      },
       category:{
         connect:{
           id:dto.categoryID
@@ -96,8 +109,12 @@ export class ProductService {
           imgURL:true,
           new:true,
           price:true,
-          sold:true,
-
+          user:{
+            select:{
+              id:true,
+              name:true
+            }
+          },
           category:{
             select:{
               title:true,
@@ -107,8 +124,9 @@ export class ProductService {
       }).catch(handleError);
     }
 
-    async delete(id: string) {
-      await this.findById(id);
+    async delete(id: string,user) {
+      isOwner(user,id)
+      await this.findOne(id);
 
       await this.prisma.product.delete({ where: { id } });
     }

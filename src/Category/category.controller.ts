@@ -19,10 +19,10 @@ import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Category } from './entities/category.entity';
 
-@ApiTags('category')
+@ApiTags('Category')
 @UseGuards(AuthGuard())
 @ApiBearerAuth()
-@Controller('category')
+@Controller('Category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
