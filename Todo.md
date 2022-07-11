@@ -4,7 +4,6 @@
 - [x] criar a rota que faz a busca apenas de produtos disponíveis.
 - [x] Implementar Compodoc
 - [x] Readme
-- [x] Testar API
 
 ### In Progress
 
