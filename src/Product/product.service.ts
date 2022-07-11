@@ -5,10 +5,10 @@ import { Product} from './entities/product.entity';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { error } from 'console';
 import { Prisma } from '@prisma/client';
-import { Category } from 'src/Category/entities/category.entity';
 import { handleError } from 'src/utils/handleError.utils';
 import { identity } from 'rxjs';
 import { isOwner } from 'src/utils/is-owner.utils';
+import { Bag } from 'src/Bag/entities/bag.entity';
 
 @Injectable()
 export class ProductService {
@@ -16,8 +16,7 @@ export class ProductService {
   constructor(private readonly prisma: PrismaService) {}
 
     findAll() {
-      return this.prisma.product.findMany({
-      })
+      return this.prisma.product.findMany({select:{bag:true}});
     }
 
     async findOne(id: string) {

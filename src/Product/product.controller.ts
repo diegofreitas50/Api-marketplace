@@ -20,7 +20,7 @@ export class ProductController {
 
   @Get()
   @ApiOperation({
-    summary: 'Listar todos os produtos',
+    summary: 'Listar todos os produtos disponíveis',
   })
 
   findAll() {

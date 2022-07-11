@@ -32,7 +32,7 @@ export class CreateProductDto {
 })
   price:number;
 
-  @IsBoolean()
+  @IsString()
 @ApiProperty({
   example:'dslakdjskaldsaldsaklasdaldda',
 })

@@ -7,7 +7,7 @@ export class Product {
   title:string;
   description:string;
   imgURL:string
-  new:Boolean;
+  new:boolean;
   price:number;
   user?:User;
   category?:Category;
