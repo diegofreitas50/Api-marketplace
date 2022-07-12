@@ -17,7 +17,7 @@ export class BagService {
   async create(user: User, createBagDto: CreateBagDto) {
     const data: Prisma.BagCreateInput = {
       product: { connect: { id: createBagDto.productId}},
-      user: { connect: user },
+      user: { connect:{id:user.id}},
     };
 
     return await this.prisma.bag.create({
@@ -32,9 +32,15 @@ export class BagService {
     }).catch(handleError);
   }
 
-  async findAll(id: string,user): Promise<Bag[]> {
-    isOwner(user,id);
-    const allBags = await this.prisma.bag.findMany();
+  async findAll(user){
+    const allBags = await this.prisma.bag.findMany(
+      {
+        where:{user:user.Id},
+        select:{
+          id:true,
+          user:{select:{id:true,name:true}},
+          product:{select:{id:true,title:true,new:true,price:true}}}
+      });
 
     if (allBags.length === 0) {
       throw new NotFoundException('Não há categorias cadastradas.');

@@ -27,8 +27,8 @@ export class BagController {
   @ApiOperation({
     summary: 'Visualizar todas as suas transações'
   })
-  findAll(id: string,user) {
-    return this.bagService.findAll(user,id);
+  findAll(@LoggedUser() user:User) {
+    return this.bagService.findAll(user);
   }
 
   @Get(':id')

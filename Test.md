@@ -5,12 +5,11 @@ https:localhost:3333/api
 
 ## Todo
 
+- [x] Bag FindOne
 
 ## In Progress
 
-- [x] Bag FindAll
 - [x] Bag FindOne
-- [x] Bag Create
 
 ## Done ✓
 
@@ -30,6 +29,6 @@ https:localhost:3333/api
 - [x] Product-findOne
 - [x] Product-Update
 - [x] Product-Delete (Apenas o próprio usuário é autorizado)
-
-
+- [x] Bag Create
+- [x] Bag FindAll
 
