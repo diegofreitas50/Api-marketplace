@@ -11,9 +11,16 @@ import { LoggedUser } from 'src/Auth/loggerd-user.decorator';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @ApiTags('ADM')
+  @Post('create-ADM')
+  @ApiOperation({ summary: 'Criar um usuário de nível "ADM"' })
+  createADM(@Body() createUserDto: CreateUserDto) {
+    return this.userService.createADM(createUserDto);
+  }
+
   @ApiTags('Create-user')
   @Post('create')
-  @ApiOperation({ summary: 'Criar um usuário' })
+  @ApiOperation({ summary: 'Criar um usuário comum' })
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
@@ -40,7 +47,7 @@ export class UserController {
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @Patch(':id')
-  @ApiOperation({ summary: 'Edita dados do usuário logado' })
+  @ApiOperation({ summary: 'Editar dados do usuário logado' })
   update(@LoggedUser() user: User, @Body() updateUserDto: UpdateUserDto) {
     updateUserDto.id = user.id;
     return this.userService.update(user, updateUserDto);
