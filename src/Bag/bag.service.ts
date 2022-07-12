@@ -40,34 +40,42 @@ export class BagService {
           id:true,
           user:{select:{id:true,name:true}},
           product:{select:{id:true,title:true,new:true,price:true}}}
-      });
+      })
 
     if (allBags.length === 0) {
       throw new NotFoundException('Não há categorias cadastradas.');
     }
 
-    return allBags;
+    return allBags
   }
 
   async findOne(id: string,user) {
-    isOwner(user,id);
-    const record = await this.prisma.bag.findUnique({
-      where: { id },
-      select: { id: true,user:true,product:true},
-    });
+    const data = await this.prisma.bag.findUnique(
+      {
+        where:{id},
+        select:{
+          id:true,
+          user:{select:{id:true,name:true}},
+          product:{select:{id:true,title:true,new:true,price:true}}}
+      });
 
-    if (!record) {
+    const userIdFromBag = data.user.id;
+    isOwner(user,userIdFromBag);
+
+    if (!data) {
       throw new NotFoundException(`Registro com id '${id}' não encontrado.`);
     }
 
-    return record;
+    return data;
   }
 
 
   async delete(user: User, id: string) {
-    isOwner(user,id);
+    const userIdFromBag  = await this.prisma.bag.findUnique({where:{id}});
 
-    await this.prisma.bag.delete({ where: { id } });
+    isOwner(user,userIdFromBag.userId);
+
+    await this.prisma.bag.delete({ where:{ id }});
 
     return `This action removes a #${id} category`;
   }

@@ -1,15 +1,18 @@
 ### Test Swagger
 
-URL:
-https:localhost:3333/api
+Local>>>URL:
+  https:localhost:3333/api
+
+Deploy>>>URL:
+  https:
 
 ## Todo
 
-- [x] Bag FindOne
+- [x]
 
 ## In Progress
 
-- [x] Bag FindOne
+- [x] Bag FindOne - falta testar a função findOne da Bag com outro usuário para um produto de outro usuário
 
 ## Done ✓
 
