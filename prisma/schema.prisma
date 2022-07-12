@@ -39,7 +39,7 @@ model Product {
   categoryID String @map("category_id")
 
   bag Bag? @relation(fields: [bagID],references: [id])
-  bagID String @map("bag_id")
+  bagID String? @map("bag_id")
 
   createdAt          DateTime @default(now()) @map("created_at")
   updatedAt          DateTime @updatedAt @map("updated_at")

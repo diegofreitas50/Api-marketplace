@@ -5,6 +5,21 @@ https:localhost:3333/api
 
 ## Todo
 
+
+## In Progress
+
+- [x] Bag FindAll
+- [x] Bag FindOne
+- [x] Bag Create
+
+## Done ✓
+
+- [x] User-create
+- [x] user-auth-login
+- [x] User-findAll
+- [x] User - FindOne
+- [x] User - Update (Não permite acrescentar o campo isAdmin ou alterar outro usuário)
+- [x] User - Delete (Só faz o delete no próprio usuário)
 - [x] Category findAll
 - [x] Category Create (Apenas ADM)
 - [x] Category FindOne
@@ -15,21 +30,6 @@ https:localhost:3333/api
 - [x] Product-findOne
 - [x] Product-Update
 - [x] Product-Delete (Apenas o próprio usuário é autorizado)
-- [x] Bag FindAll
-- [x] Bag FindOne
-- [x] Bag Create
 
-## In Progress
-
-- [x] Product-create
-
-## Done ✓
-
-- [x] User-create
-- [x] user-auth-login
-- [x] User-findAll
-- [x] User - FindOne
-- [x] User - Update (Não permite acrescentar o campo isAdmin ou alterar outro usuário)
-- [x] User - Delete (Só faz o delete no próprio usuário)
 
 

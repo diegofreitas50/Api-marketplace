@@ -9,6 +9,7 @@ import { handleError } from 'src/utils/handleError.utils';
 import { identity } from 'rxjs';
 import { isOwner } from 'src/utils/is-owner.utils';
 import { Bag } from 'src/Bag/entities/bag.entity';
+import { empty } from '@prisma/client/runtime';
 
 @Injectable()
 export class ProductService {
@@ -16,13 +17,13 @@ export class ProductService {
   constructor(private readonly prisma: PrismaService) {}
 
     findAll() {
-      return this.prisma.product.findMany({select:{bag:true}});
-    }
+      return this.prisma.product.findMany({where:{bagID:null}})
+      }
 
     async findOne(id: string) {
       const record = await this.prisma.product.findUnique({
         where: { id },
-        select: { id: true, title: true },
+        select: { id: true, title: true, imgURL:true},
       });
 
       if (!record) {
@@ -41,7 +42,9 @@ export class ProductService {
       new: dto.new,
       price: dto.price,
       user:{
-        connect:user.userID
+        connect:{
+          id:user.id
+        }
       },
       category:{
         connect:{
@@ -75,8 +78,9 @@ export class ProductService {
   }
 
 
-   update(id: string,dto:UpdateProductDto,user){
-    isOwner(user,id);
+   async update(id: string,dto:UpdateProductDto,user){ //
+    const selectProduct = await this.prisma.product.findUnique({where:{id}});
+    isOwner(user,selectProduct.userID);
     this.findOne(id);
 
     const data: Prisma.ProductUpdateInput = {
@@ -87,7 +91,7 @@ export class ProductService {
       price: dto.price,
       user:{
         connect:{
-          id:user.userID,
+          id:user.id,
         }
       },
       category:{
@@ -124,10 +128,11 @@ export class ProductService {
     }
 
     async delete(id: string,user) {
-      isOwner(user,id)
+      const selectProduct = await this.prisma.product.findUnique({where:{id}});
+      isOwner(user,selectProduct.userID)
       await this.findOne(id);
 
-      await this.prisma.product.delete({ where: { id } });
+      await this.prisma.product.delete({ where: { id } }).catch(handleError);
     }
 
 }

@@ -1,7 +1,6 @@
 ### Todo
 
 - [x] Incluir a função isAdmin nos campos devidos
-- [x] criar a rota que faz a busca apenas de produtos disponíveis.
 - [x] Implementar Compodoc
 - [x] Readme
 
@@ -20,4 +19,5 @@
 - [x] CRUD completo de todas as entidades
 - [x] Incluir a função loggedUser nos campos devidos
 - [x] Criar a rota de criação de usuário nível "ADM".
+- [x] criar a rota que faz a busca apenas de produtos disponíveis.
 

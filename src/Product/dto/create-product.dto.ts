@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsBoolean, IsNumber, IsString} from "class-validator";
+import {IsBoolean, IsNumber, IsString} from "class-validator";
 
 export class CreateProductDto {
   @IsString()
@@ -20,9 +20,9 @@ export class CreateProductDto {
 })
   imgURL:string
 
-  @IsBoolean()
+ @IsBoolean()
 @ApiProperty({
-  example:'True or False',
+  example:'true or false',
 })
   new:boolean;
 
