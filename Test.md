@@ -1,11 +1,3 @@
-### Test Swagger
-
-Local>>>URL:
-  https:localhost:3333/api
-
-Deploy>>>URL:
-  https:
-
 ## Todo
 ## In Progress
 ## Done ✓

@@ -1,12 +1,5 @@
 ### Todo
-
-- [x] Implementar Compodoc
-- [x] Readme
-
 ### In Progress
-
-- [x] Testar API (Felipe)
-
 ### Done ✓
 
 - [x] Estrutura do banco de dados
@@ -20,3 +13,5 @@
 - [x] Criar a rota de criação de usuário nível "ADM".
 - [x] criar a rota que faz a busca apenas de produtos disponíveis.
 - [x] Incluir a função isAdmin nos campos devidos
+- [x] Readme
+- [x] Testar API 
