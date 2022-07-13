@@ -130,9 +130,8 @@ export class ProductService {
     async delete(id: string,user) {
       const selectProduct = await this.prisma.product.findUnique({where:{id}});
       isOwner(user,selectProduct.userID)
-      await this.findOne(id);
 
-      await this.prisma.product.delete({ where: { id } }).catch(handleError);
+      return await this.prisma.product.delete({ where: { id }}).catch(handleError);
     }
 
 }
