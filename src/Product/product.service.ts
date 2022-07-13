@@ -25,7 +25,7 @@ export class ProductService {
         where: { id },
         select: { id: true, title: true, imgURL:true},
       });
-
+      
       if (!record) {
         throw new NotFoundException(`Registro com id '${id}' não encontrado.`);
       }

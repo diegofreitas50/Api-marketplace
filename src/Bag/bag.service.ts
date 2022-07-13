@@ -43,7 +43,7 @@ export class BagService {
       })
 
     if (allBags.length === 0) {
-      throw new NotFoundException('Não há categorias cadastradas.');
+      throw new NotFoundException('Não há registros de transações (Bag)');
     }
 
     return allBags
