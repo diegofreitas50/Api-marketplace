@@ -77,6 +77,6 @@ export class BagService {
 
     await this.prisma.bag.delete({ where:{ id }});
 
-    return `This action removes a #${id} category`;
+    return `This action removes a bag id: #${id} `;
   }
 }
