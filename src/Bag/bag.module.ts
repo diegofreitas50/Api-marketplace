@@ -7,6 +7,6 @@ import { PrismaModule } from 'src/prisma/prisma.module';
 @Module({
   imports: [PrismaModule, PassportModule.register({ defaultStrategy: 'jwt' })],
   controllers: [BagController],
-  providers: [BagService]
+  providers: [BagService],
 })
 export class BagModule {}

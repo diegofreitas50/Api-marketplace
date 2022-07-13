@@ -9,7 +9,6 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { handleError } from 'src/utils/handleError.utils';
-import { isAdmin } from 'src/utils/is-admin.utils';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
@@ -39,7 +38,7 @@ export class UserService {
       cpf: dto.cpf,
       email: dto.email,
       password: await bcrypt.hash(dto.password, 10),
-      isAdmin:true,
+      isAdmin: true,
     };
 
     return this.prisma.user
@@ -59,7 +58,6 @@ export class UserService {
       .catch(handleError);
   }
 
-
   async create(dto: CreateUserDto) {
     if (dto.password != dto.confirmPassword) {
       throw new BadRequestException('As senhas informadas não são iguais.');
@@ -72,7 +70,7 @@ export class UserService {
       cpf: dto.cpf,
       email: dto.email,
       password: await bcrypt.hash(dto.password, 10),
-      isAdmin:false,
+      isAdmin: false,
     };
 
     return this.prisma.user
@@ -125,7 +123,6 @@ export class UserService {
   }
 
   async update(user: User, updateUserDto: UpdateUserDto) {
-
     if (updateUserDto.password) {
       if (updateUserDto.password != updateUserDto.confirmPassword) {
         throw new BadRequestException('As senhas informadas não são iguais.');

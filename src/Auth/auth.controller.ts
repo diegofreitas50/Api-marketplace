@@ -1,5 +1,12 @@
-import { Controller,Body,Post,HttpCode,HttpStatus,Get } from '@nestjs/common';
-import { ApiOperation,ApiTags,ApiBearerAuth } from '@nestjs/swagger';
+import {
+  Controller,
+  Body,
+  Post,
+  HttpCode,
+  HttpStatus,
+  Get,
+} from '@nestjs/common';
+import { ApiOperation, ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LoginResponseDto } from './dto/login-response.dto';
 import { LoginDto } from './dto/login.dto';
@@ -18,7 +25,6 @@ export class AuthController {
   @ApiOperation({
     summary: 'Realizar login, recebendo um token de autenticação',
   })
-
   login(@Body() loginDto: LoginDto): Promise<LoginResponseDto> {
     return this.authService.login(loginDto);
   }
@@ -30,7 +36,6 @@ export class AuthController {
   })
   @ApiBearerAuth()
   profile(@LoggedUser() user: User) {
-    return {message: 'Autenticado com sucesso.', user};
+    return { message: 'Autenticado com sucesso.', user };
   }
 }
-

@@ -1,5 +1,11 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsNumber, IsString, Length, Matches, MinLength } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
+import {
+  IsEmail,
+  IsString,
+  Length,
+  Matches,
+  MinLength,
+} from 'class-validator';
 
 export class CreateUserDto {
   @Length(3, 40)
@@ -46,7 +52,8 @@ export class CreateUserDto {
   confirmPassword: string;
 
   @ApiProperty({
-    description: 'Nível de autorização!(Apenas usuários com perfil de "ADM" poderão alterar este campo!',
+    description:
+      'Nível de autorização!(Apenas usuários com perfil de "ADM" poderão alterar este campo!',
     example: false,
   })
   isAdmin: boolean;

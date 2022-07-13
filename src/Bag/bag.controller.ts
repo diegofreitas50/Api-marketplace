@@ -1,10 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  HttpCode,
+  HttpStatus,
+  UseGuards,
+} from '@nestjs/common';
 import { LoggedUser } from 'src/Auth/loggerd-user.decorator';
 import { User } from 'src/User/entities/user.entity';
 import { BagService } from './bag.service';
 import { CreateBagDto } from './dto/create-bag.dto';
-import { UpdateBagDto } from './dto/update-bag.dto';
-import { Bag, Product } from '@prisma/client';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 
@@ -25,18 +33,18 @@ export class BagController {
 
   @Get()
   @ApiOperation({
-    summary: 'Visualizar todas as suas transações'
+    summary: 'Visualizar todas as suas transações',
   })
-  findAll(@LoggedUser() user:User) {
+  findAll(@LoggedUser() user: User) {
     return this.bagService.findAll(user);
   }
 
   @Get(':id')
   @ApiOperation({
-    summary: 'Visualizar uma de suas transações (Bag).'
+    summary: 'Visualizar uma de suas transações (Bag).',
   })
-  findOne(@LoggedUser() user:User,@Param('id') id: string) {
-    return this.bagService.findOne(id,user);
+  findOne(@LoggedUser() user: User, @Param('id') id: string) {
+    return this.bagService.findOne(id, user);
   }
 
   @HttpCode(HttpStatus.NO_CONTENT)
@@ -44,7 +52,7 @@ export class BagController {
   @ApiOperation({
     summary: 'Deletar um registro de transação (Bag).',
   })
-  delete(@LoggedUser() user: User, @Param('id') id:string) {
+  delete(@LoggedUser() user: User, @Param('id') id: string) {
     return this.bagService.delete(user, id);
   }
 }
