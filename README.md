@@ -54,7 +54,7 @@ $ npm run start:prod
 * PostgreSQL
 * Swagger
 * railway
-
+* Compodoc
 
 ## Autores
 

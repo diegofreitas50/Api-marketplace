@@ -20,7 +20,6 @@ model User{
 
   createdAt          DateTime @default(now()) @map("created_at")
   updatedAt          DateTime @updatedAt @map("updated_at")
-  @@map("user")
 }
 
 model Product {
@@ -43,7 +42,6 @@ model Product {
 
   createdAt          DateTime @default(now()) @map("created_at")
   updatedAt          DateTime @updatedAt @map("updated_at")
-   @@map("product")
 }
 
 model Category{
@@ -53,7 +51,6 @@ model Category{
 
   createdAt          DateTime @default(now()) @map("created_at")
   updatedAt          DateTime @updatedAt @map("updated_at")
-   @@map("category")
 }
 
 
@@ -67,5 +64,4 @@ model Bag{
 
   createdAt          DateTime @default(now()) @map("created_at")
   updatedAt          DateTime @updatedAt @map("updated_at")
-   @@map("bag")
 }
