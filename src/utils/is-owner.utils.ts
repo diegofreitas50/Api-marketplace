@@ -1,6 +1,5 @@
 import { UnauthorizedException } from '@nestjs/common';
-import { User } from 'src/user/entities/user.entity';
-import { Bag } from 'src/Bag/entities/bag.entity';
+import { User } from '../User/entities/user.entity';
 
 export function isOwner(user: User,id:string) {
   if (user.id != id) {
