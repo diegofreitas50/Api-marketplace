@@ -7,13 +7,7 @@ Deploy>>>URL:
   https:
 
 ## Todo
-
-- [x]
-
 ## In Progress
-
-- [x] Bag FindOne - falta testar a função findOne da Bag com outro usuário para um produto de outro usuário
-
 ## Done ✓
 
 - [x] User-create
@@ -34,4 +28,5 @@ Deploy>>>URL:
 - [x] Product-Delete (Apenas o próprio usuário é autorizado)
 - [x] Bag Create
 - [x] Bag FindAll
+- [x] Bag FindOne
 
