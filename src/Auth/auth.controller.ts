@@ -8,9 +8,8 @@ import { UseGuards } from '@nestjs/common';
 import { LoggedUser } from './loggerd-user.decorator';
 import { User } from 'src/User/entities/user.entity';
 
-
-@Controller('Auth')
 @ApiTags('Auth')
+@Controller('Auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 

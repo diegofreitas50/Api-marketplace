@@ -46,10 +46,8 @@ export class CreateUserDto {
   confirmPassword: string;
 
   @ApiProperty({
-    description: 'Declaração de Adm.',
+    description: 'Nível de autorização!(Apenas usuários com perfil de "ADM" poderão alterar este campo!',
     example: false,
   })
   isAdmin: boolean;
-
-  id?: string;
 }
