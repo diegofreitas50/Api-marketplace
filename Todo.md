@@ -1,13 +1,10 @@
 ### Todo
 
- - [x] Criar entidade transações (Create,findAll, FindOne, Delete Bag )
- - [x] alterar controller e service da Bag (Create e update)
- - [x] Na entidade product, será necessário alterar o price para aceitar números flutuantes
- - [x] No service do product, função findAll, incluir o nome do usuário
+- [x] Finalizar service e controller da entidade transações (Create(Finalizar transação!),findOne,findAll,update(Estornos!))
 
 ### In Progress
 
--[x]
+
 
 ### Done ✓
 
@@ -24,3 +21,9 @@
 - [x] Incluir a função isAdmin nos campos devidos
 - [x] Readme
 - [x] Testar API
+
+### CHANGED
+- [x] alterar controller e service da Bag (Create,findOne e update(AddProduct))
+- [x] No service do product, função findAll, incluir o nome do usuário
+- [x] Na entidade product, será necessário alterar o price para aceitar números flutuantes
+- [x] Incluída a entidade transaction para executar diversas transações:Depósito,transferências e pagamentos. (Ainda não testado!)

@@ -1,5 +1,9 @@
 ## Todo
+
 ## In Progress
+
+- [x] Bag - Transaction (methodOfPayment,installments,totalPayable)
+
 ## Done ✓
 
 - [x] User-create

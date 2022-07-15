@@ -17,6 +17,7 @@ model User{
 
   product Product[]
   bag Bag[]
+  transactions Transaction[]
 
   createdAt          DateTime @default(now()) @map("created_at")
   updatedAt          DateTime @updatedAt @map("updated_at")
@@ -32,7 +33,7 @@ model Product {
   description String
   imgURL String
   new Boolean
-  price Int
+  price Float
 
   category Category @relation(fields: [categoryID],references: [id])
   categoryID String @map("category_id")
@@ -61,6 +62,29 @@ model Bag{
   userId String @map("user_id")
 
   product Product[]
+
+  methodOfPayment String
+  installments Int
+  totalPayable Float
+
+  transaction Transaction[]
+
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+}
+
+model Transaction{
+  id String @id @default(uuid())
+
+  bag Bag @relation(fields: [bagID],references:[id])
+  bagID String @map("bag_id")
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
+
+  methodOfPayment String
+  installments Int
+  totalPayable Float
 
   createdAt          DateTime @default(now()) @map("created_at")
   updatedAt          DateTime @updatedAt @map("updated_at")

@@ -1,5 +1,6 @@
 import {Product} from"src/Product/entities/product.entity"
 import { Bag } from "src/Bag/entities/bag.entity";
+import {Transaction} from "src/Transaction/entities/transaction.entity"
 
 export class User {
   id?: string;
@@ -8,8 +9,9 @@ export class User {
   email: string;
   password: string;
   isAdmin?: boolean;
-  product?:Product;
+  product?:Product[];
   bag?:Bag;
+  transactions?:Transaction[]
   createdAt?: Date;
   updatedAt?: Date;
 }

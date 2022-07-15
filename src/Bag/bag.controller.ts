@@ -23,28 +23,20 @@ export class BagController {
     return this.bagService.create(user, createBagDto);
   }
 
-  @Get()
-  @ApiOperation({
-    summary: 'Visualizar todas as suas transações'
-  })
-  findAll(@LoggedUser() user:User) {
-    return this.bagService.findAll(user);
-  }
-
   @Get(':id')
   @ApiOperation({
     summary: 'Visualizar uma de suas transações (Bag).'
   })
-  findOne(@LoggedUser() user:User,@Param('id') id: string) {
-    return this.bagService.findOne(id,user);
+  findOne(@LoggedUser() user:User) {
+    return this.bagService.findOne(user);
   }
 
   @HttpCode(HttpStatus.NO_CONTENT)
-  @Delete(':id')
+  @Patch(':id')
   @ApiOperation({
-    summary: 'Deletar um registro de transação (Bag).',
+    summary:'Para incluir produtos na bag'
   })
-  delete(@LoggedUser() user: User, @Param('id') id:string) {
-    return this.bagService.delete(user, id);
+  addProduct(@LoggedUser() user:User,@Body() createBagDto: CreateBagDto){
+    return this.bagService.addProduct(user,createBagDto);
   }
 }

@@ -17,15 +17,35 @@ export class ProductService {
   constructor(private readonly prisma: PrismaService) {}
 
     findAll() {
-      return this.prisma.product.findMany({where:{bagID:null}})
+      return this.prisma.product.findMany({
+        where:{bagID:null},
+        select:{
+        title:true,
+        description:true,
+        imgURL:true,
+        new:true,
+        price:true,
+        user:{
+          select:{
+            id:true,
+            name:true
+          }
+        },
+        category:{
+          select:{
+            title:true,
+          }
+        }
       }
+    })
+  }
 
     async findOne(id: string) {
       const record = await this.prisma.product.findUnique({
         where: { id },
         select: { id: true, title: true, imgURL:true},
       });
-      
+
       if (!record) {
         throw new NotFoundException(`Registro com id '${id}' não encontrado.`);
       }
