@@ -54,7 +54,7 @@ export class CreateUserDto {
   @ApiProperty({
     description:
       'Nível de autorização!(Apenas usuários com perfil de "ADM" poderão alterar este campo!',
-    example: true,
+    example: false,
   })
   isAdmin: boolean;
 }

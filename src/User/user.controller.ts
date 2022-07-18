@@ -70,7 +70,7 @@ export class UserController {
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
   @ApiOperation({
-    summary: 'Remove usuário logado. Apenas para ADM',
+    summary: 'Remove usuário logado.',
   })
   delete(@LoggedUser() user: User) {
     return this.userService.delete(user);

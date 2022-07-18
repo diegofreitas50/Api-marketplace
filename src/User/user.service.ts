@@ -10,6 +10,7 @@ import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { handleError } from 'src/utils/handleError.utils';
 import { Prisma } from '@prisma/client';
+import { isAdmin } from 'src/utils/is-admin.utils';
 
 @Injectable()
 export class UserService {

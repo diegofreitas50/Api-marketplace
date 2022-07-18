@@ -25,7 +25,7 @@ export class ProductController {
   constructor(private productService: ProductService) {}
 
   @ApiTags('Home Page - all products')
-  @Get()
+  @Get('home')
   @ApiOperation({
     summary: 'Listar todos os produtos disponíveis',
   })
