@@ -30,9 +30,9 @@ export class BagService {
       .catch(handleError);
   }
 
-  async findAll(user) {
+  async findAll(user: User) {
     const allBags = await this.prisma.bag.findMany({
-      where: { user: user.id },
+      where: { userId: user.id },
       select: {
         id: true,
         user: { select: { id: true, name: true } },
