@@ -18,13 +18,13 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { LoggedUser } from 'src/Auth/loggerd-user.decorator';
 import { User } from 'src/User/entities/user.entity';
 
-@ApiTags('Product')
 @UseGuards(AuthGuard())
 @ApiBearerAuth()
 @Controller('Product')
 export class ProductController {
   constructor(private productService: ProductService) {}
 
+  @ApiTags('Home Page - all products')
   @Get()
   @ApiOperation({
     summary: 'Listar todos os produtos disponíveis',
@@ -33,6 +33,7 @@ export class ProductController {
     return this.productService.findAll();
   }
 
+  @ApiTags('Product')
   @Get(':id')
   @ApiOperation({
     summary: 'Localizar um produto',
@@ -41,6 +42,7 @@ export class ProductController {
     return this.productService.findOne(id);
   }
 
+  @ApiTags('Product')
   @Post()
   @ApiOperation({
     summary: 'Adicionar um produto',
@@ -49,6 +51,7 @@ export class ProductController {
     return this.productService.create(createProductDto, user);
   }
 
+  @ApiTags('Product')
   @Patch(':id')
   @ApiOperation({
     summary: 'Alterar dados de um produto',
@@ -61,6 +64,7 @@ export class ProductController {
     return this.productService.update(id, dto, user);
   }
 
+  @ApiTags('Product')
   @Delete(':id')
   @ApiOperation({
     summary: 'Deletar um produto',

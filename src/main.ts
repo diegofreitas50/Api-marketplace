@@ -22,6 +22,7 @@ async function bootstrap() {
     .addTag('ADM')
     .addTag('Create-user')
     .addTag('User')
+    .addTag('Home Page - all products')
     .addTag('Product')
     .addTag('Category')
     .addTag('Bag')

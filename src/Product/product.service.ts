@@ -11,8 +11,16 @@ import { User } from 'src/User/entities/user.entity';
 export class ProductService {
   constructor(private readonly prisma: PrismaService) {}
 
-  findAll() {
-    return this.prisma.product.findMany({ where: { bagID: null } });
+  async findAll() {
+    const allProduct = await this.prisma.product.findMany({
+      where: { bagID: null },
+    });
+
+    if (allProduct.length === 0) {
+      throw new NotFoundException('Não há produtos cadastrados.');
+    }
+
+    return allProduct;
   }
 
   async findOne(id: string) {

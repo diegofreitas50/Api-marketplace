@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsNumber, IsString } from 'class-validator';
+import { IsBoolean, IsNumber, IsString, IsUrl } from 'class-validator';
 
 export class CreateProductDto {
   @IsString()
@@ -14,6 +14,7 @@ export class CreateProductDto {
   })
   description: string;
 
+  @IsUrl()
   @IsString()
   @ApiProperty({
     example: 'Url relacionada a foto do produto',
@@ -34,13 +35,13 @@ export class CreateProductDto {
 
   @IsString()
   @ApiProperty({
-    example: 'dslakdjskaldsaldsaklasdaldda',
+    example: '0c4b59bb-e169-40a4-81f5-4c34d2c2ca4b',
   })
   userID: string;
 
   @IsString()
   @ApiProperty({
-    example: 'dslakdjskaldsaldsaklasdaldda',
+    example: '0c4b59bb-e169-40a4-81f5-4c34d2c2ca4b',
   })
   categoryID?: string;
 }
