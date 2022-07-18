@@ -6,6 +6,7 @@ import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { Transaction} from 'src/Transaction/entities/transaction.entity';
 import { LoggedUser } from 'src/Auth/loggerd-user.decorator';
+import { User } from '@prisma/client';
 
 @Controller('Transaction')
 export class TransactionController {
@@ -14,8 +15,8 @@ export class TransactionController {
   @ApiTags('Transaction')
   @Post('create')
   @ApiOperation({ summary: 'Executar transação' })
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+  create(@Body() dto:CreateTransactionDto,@LoggedUser() user:User) {
+    return this.transactionService.create(dto,user)
   }
 
   @ApiTags('User')

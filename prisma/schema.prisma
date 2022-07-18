@@ -63,11 +63,7 @@ model Bag{
 
   product Product[]
 
-  methodOfPayment String
-  installments Int
   totalPayable Float
-
-  transaction Transaction[]
 
   createdAt          DateTime @default(now()) @map("created_at")
   updatedAt          DateTime @updatedAt @map("updated_at")
@@ -76,15 +72,12 @@ model Bag{
 model Transaction{
   id String @id @default(uuid())
 
-  bag Bag @relation(fields: [bagID],references:[id])
-  bagID String @map("bag_id")
-
   user   User   @relation(fields: [userId], references: [id])
   userId String @map("user_id")
 
   methodOfPayment String
   installments Int
-  totalPayable Float
+  finish Boolean
 
   createdAt          DateTime @default(now()) @map("created_at")
   updatedAt          DateTime @updatedAt @map("updated_at")

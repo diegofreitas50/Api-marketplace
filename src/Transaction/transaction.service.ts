@@ -11,6 +11,9 @@ import * as bcrypt from 'bcrypt';
 import { handleError } from 'src/utils/handleError.utils';
 import { isAdmin } from 'src/utils/is-admin.utils';
 import { Prisma } from '@prisma/client';
+import { User } from 'src/User/entities/user.entity';
+import { Bag } from 'src/Bag/entities/bag.entity';
+import { identity } from 'rxjs';
 
 @Injectable()
 export class TransactionService {
@@ -18,27 +21,29 @@ export class TransactionService {
   constructor(private readonly prisma: PrismaService) {}
 
 
-  async create(dto: CreateTransactionDto) {
+  async create(dto:CreateTransactionDto,user:User) {
     const data: Prisma.TransactionCreateInput = {
-      name: dto.name,
-      cpf: dto.cpf,
-      email: dto.email,
-      password: await bcrypt.hash(dto.password, 10),
-      isAdmin:false,
+      user:{
+        connect:{id:user.id}
+      },
+      installments:dto.installments,
+      methodOfPayment:dto.methodOfPaymenId,
+      finish:dto.finish
     };
 
-    return this.prisma.user
+    const userBag = await this.prisma.bag.findMany({where:{id:user.id}});
+
+    return this.prisma.transaction
       .create({
         data,
         select: {
-          password: false,
-          id: true,
-          name: true,
-          email: true,
-          isAdmin: true,
-          cpf: true,
-          createdAt: true,
-          updatedAt: true,
+          user:{
+            select:{
+              id:true,
+              name:true,
+            }
+          }
+
         },
       })
       .catch(handleError);

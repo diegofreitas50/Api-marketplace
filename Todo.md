@@ -4,7 +4,7 @@
 
 ### In Progress
 
-
+- [x] create-transaction (incluir disconnect de produtos e delete dos produtos incluídos)
 
 ### Done ✓
 
