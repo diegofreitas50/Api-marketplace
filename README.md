@@ -2,7 +2,7 @@
 
 ## Descrição
 
-descrição...
+Back-end API de um exemplo de marketplace, inspirado na plataforma da OLX, permitindo realizar cadastro de usuários, anúncio, compra e venda de produtos.
 
 ## Deploy da aplicação [clicando aqui](https://api-marketplace-production.up.railway.app)
 
